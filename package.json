@@ -1,0 +1,22 @@
+{
+    "name": "asem-api",
+    "version": "1.0.0",
+    "description": "ASem's a project to manage the students attendance",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon index.js"
+    },
+    "author": "meriam-houda",
+    "license": "ISC",
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "express": "^4.17.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.1.6"
+    }
+}
