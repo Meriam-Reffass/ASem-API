@@ -7,32 +7,25 @@ const publicRoutes = require("./routes/publicRoutes");
 
 const app = express();
 mongoose.connect(
-    "mongodb+srv://meriam:<password>@cluster0.kgdxl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+    "mongodb://localhost:27017/ASem", {
         useNewUrlParser: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true,
+        // useFindAndModify: true,
+        // useUnifiedTopology: true,
     },
     () => {
         console.log("connected to db");
-        initial();
+        // initial();
     }
 );
 
-var corsOptions = {
-    origin: "*",
-};
-
-app.use(cors(corsOptions));
-
+app.use(cors());
 // parse requests of content-type - application/json
 app.use(express.json());
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-
 // simple route
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
+    res.json({ message: "Welcome to ASem application." });
 });
 app.use("/", publicRoutes)
     // set port, listen for requests
