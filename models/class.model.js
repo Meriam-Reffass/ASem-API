@@ -5,19 +5,61 @@ const Class = mongoose.model(
     new mongoose.Schema({
         className: { type: String, required: true },
         promo: { type: Number, required: true },
-        mondayMorning: { type: Boolean,  required: true},
-        mondayAfterNoon: { type: Boolean,  required: true},
-        tuesdayMorning: { type: Boolean,  required: true},
-        tuesdayAfterNoon: { type: Boolean,  required: true},
-        wednesdayMorning: { type: Boolean,  required: true},
-        wednesdayAfterNoon: { type: Boolean,  required: true},
-        thursdayMorning: { type: Boolean,  required: true},
-        thursdayAfterNoon: { type: Boolean,  required: true},
-        fridayMorning: { type: Boolean,  required: true},
-        fridayAfterNoon: { type: Boolean,  required: true},
-        saturdayMorning: { type: Boolean,  required: true},
-        saturdayAfterNoon: { type: Boolean,  required: true},
+        monday: {
+            morning: { type: Boolean, required: true, default: true },
+            afternoon: { type: Boolean, required: true, default: true },
+        }, tuesday: {
+            morning: { type: Boolean, required: true, default: true },
+            afternoon: { type: Boolean, required: true, default: true },
+        }, wednesday: {
+            morning: { type: Boolean, required: true, default: true },
+            afternoon: { type: Boolean, required: true, default: true },
+        }, thursday: {
+            morning: { type: Boolean, required: true, default: true },
+            afternoon: { type: Boolean, required: true, default: true },
+        }, friday: {
+            morning: { type: Boolean, required: true, default: true },
+            afternoon: { type: Boolean, required: true, default: true },
+        }, saturday: {
+            morning: { type: Boolean, required: true, default: true },
+            afternoon: { type: Boolean, required: true, default: true },
+        },
+        sunday: {
+            morning: { type: Boolean, required: true, default: true },
+            afternoon: { type: Boolean, required: true, default: true },
+        },
 
+
+
+        // "className": "cloud",
+        // "promo": 2024,
+        // "monday": {
+        //     "morning": true,
+        //     "afternoon": true,
+        // },
+        // "tuesday": {
+        //     "morning": true,
+        //     "afternoon": true,
+        // },
+        // "wednesday": {
+        //     "morning": true,
+        //     "afternoon": true,
+        // },
+        // "thursday": {
+        //     "morning": true,
+        //     "afternoon": true,
+        // },
+        // "friday": {
+        //     "morning": true,
+        //     "afternoon": true,
+        // }
+        // ,
+        // "saturday": {
+        //     "morning": true,
+        //     "afternoon": true,
+        // },
+
+        
     })
 );
 

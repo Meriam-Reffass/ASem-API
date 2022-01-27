@@ -4,6 +4,8 @@ const cors = require("cors");
 const db = require("./models");
 const Role = db.role;
 const publicRoutes = require("./routes/publicRoutes");
+const privateRoutes = require("./routes/privateRoutes");
+var validate_token = require("./middlewares/validate-token");
 
 const app = express();
 mongoose.connect(
@@ -28,6 +30,7 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to ASem application." });
 });
 app.use("/", publicRoutes)
+app.use('/api/', validate_token,privateRoutes);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
