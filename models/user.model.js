@@ -7,17 +7,18 @@ const User = mongoose.model(
         lastName: { type: String, required: true },
         email: { type: String, unique: true, required: true, match: /.+\@.+\..+/, },
         password: { type: String, required: true },
+        nonVerifiedHours : {type:Number , default:0},
         role: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Role"
         },
-        class: {
+        studyClass: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Class"
         },
-        presence: [{
+        presences: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "presence"
+            ref: "Presence"
         }]
     })
 );

@@ -5,7 +5,9 @@ const db = require("./models");
 const Role = db.role;
 const publicRoutes = require("./routes/publicRoutes");
 const privateRoutes = require("./routes/privateRoutes");
-var validate_token = require("./middlewares/validate-token");
+const job = require("./jobs/calculatePresence")
+const validate_token = require("./middlewares/validate-token");
+const { default: calculatePresence } = require("./jobs/calculatePresence");
 
 const app = express();
 mongoose.connect(
@@ -30,12 +32,15 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to ASem application." });
 });
 app.use("/", publicRoutes)
-app.use('/api/', validate_token,privateRoutes);
+app.use('/api/', validate_token, privateRoutes);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
+
+
+job.start();
 const initial = function () {
     Role.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
@@ -60,5 +65,6 @@ const initial = function () {
 
                 console.log("added 'admin' to roles collection");
             });
-        }});
-    };
+        }
+    });
+};
