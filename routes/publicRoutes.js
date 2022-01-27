@@ -7,7 +7,7 @@ const Role = require("../models/role.model");
 const bcrypt = require("bcryptjs");
 
 router.post("/login", async(req, res) => {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email }).populate("role");
     if (!user) return res.status(400).json({ error: "Email does not exist" });
     // check for password correctness
     var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
@@ -28,6 +28,7 @@ router.post("/login", async(req, res) => {
             firstName: user.firstName,
             lastName: user.lastName,
             _id: user._id,
+            role: user.role.name,
         },
     });
 });

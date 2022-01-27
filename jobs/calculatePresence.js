@@ -20,7 +20,7 @@ const job = new CronJob('00 00 10,16 * * 1-6', function () {
             const studiying = class_user[weekday][timeOfDay];
             console.log(1);
             if (studiying) {
-                console.log(2);
+                const oldValueHours = user.nonVerifiedHours
                 const today = moment().startOf('day')
 
                 await user.populate("presences", null, {
@@ -32,6 +32,7 @@ const job = new CronJob('00 00 10,16 * * 1-6', function () {
                 });
                 if (user.presences.length == 0) {
                     user.nonVerifiedHours += 3;
+
                     user.save();
                     console.log(3);
 
@@ -61,7 +62,13 @@ const job = new CronJob('00 00 10,16 * * 1-6', function () {
                     }
                 }
 
-
+                if (user.nonVerifiedHours != oldValueHours) {
+                    if (user.nonVerifiedHours > 20)
+                        user.alerts.push({});
+                    else
+                        user.exclusions.push({});
+                    user.save()
+                }
             }
 
 

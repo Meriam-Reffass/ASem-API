@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const Role = require("../models/role.model");
 isAdmin = (req, res, next) => {
-    User.findById(req.userId).exec((err, user) => {
+    User.findById(req.user._id).exec((err, user) => {
         if (err) {
             res.status(500).send({ message: err });
             return;
