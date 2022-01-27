@@ -10,7 +10,15 @@ const User = mongoose.model(
         role: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Role"
-        }
+        },
+        class: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Class"
+        },
+        presence: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "presence"
+        }]
     })
 );
 
