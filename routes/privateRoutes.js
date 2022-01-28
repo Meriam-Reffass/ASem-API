@@ -9,6 +9,7 @@ const Presence = require('../models/presence.model');
 const checkWorkingTime = require("../middlewares/checkWorkingTime");
 const moment = require("moment");
 const Class = require('../models/class.model');
+const bcrypt = require("bcryptjs");
 
 
 
@@ -89,6 +90,21 @@ router.get("/students", [isAdmin], async (req, res) => {
 
     const users = await User.find({ role: role._id }).populate("studyClass", "className promo");
     return res.send(users)
+});
+router.post("/students", [isAdmin], async (req, res) => {
+    const student = new User(req.body);
+    const role = await Role.findOne({ name: "student" })
+
+    student.password = bcrypt.hashSync(req.body.password, 8)
+    student.role = role._id;
+    try {
+        student.save();
+        return res.send(student)
+
+    } catch (error) {
+        res.status(500).send({ message: error });
+
+    }
 });
 // router.get("/student/{id}", [isAdmin], async (res, req) => {
 //     //TODO
