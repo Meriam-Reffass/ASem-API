@@ -106,9 +106,17 @@ router.post("/students", [isAdmin], async (req, res) => {
 
     }
 });
-// router.get("/student/{id}", [isAdmin], async (res, req) => {
-//     //TODO
-// });
+router.get("/student/:id",  async (req, res) => {
+    const user = await User.findById(req.params.id)
+    return res.send(user);
+});
+
+router.get("/student/:id/class", async (req, res) => {
+    const user = await User.findById(req.params.id).populate("studyClass")
+    return res.send(user.studyClass);
+
+    
+});
 // router.put("/student/{id}", [isAdmin], async (res, req) => {
 //     //TODO
 // });

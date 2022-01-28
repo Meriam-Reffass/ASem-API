@@ -6,7 +6,7 @@ var path = require("path");
 const Role = require("../models/role.model");
 const bcrypt = require("bcryptjs");
 
-router.post("/login", async(req, res) => {
+router.post("/login", async (req, res) => {
     const user = await User.findOne({ email: req.body.email }).populate("role");
     if (!user) return res.status(400).json({ error: "Email does not exist" });
     // check for password correctness
@@ -14,10 +14,10 @@ router.post("/login", async(req, res) => {
     if (!passwordIsValid)
         return res.status(400).json({ error: "Password is wrong" });
     const token = jwt.sign({
-            firstName: user.firstName,
-            lastName: user.lastName,
-            _id: user._id,
-        },
+        firstName: user.firstName,
+        lastName: user.lastName,
+        _id: user._id,
+    },
         "meriam123"
     );
     res.header("auth-token", token).json({
@@ -29,11 +29,13 @@ router.post("/login", async(req, res) => {
             lastName: user.lastName,
             _id: user._id,
             role: user.role.name,
+            email: user.email,
+
         },
     });
 });
 
-router.post("/register", async(req, res) => {
+router.post("/register", async (req, res) => {
     // const role = await Role.findOne({ name: req.body.role });
     //if (!role) return res.status(400).json({ error: "Role is wrong" });
     const user_f = await User.findOne({ email: req.body.email });
@@ -50,9 +52,9 @@ router.post("/register", async(req, res) => {
         const savedUser = await user.save();
         const token = jwt.sign({
             _id: savedUser._id,
-                firstName: savedUser.firstName,
-                lastName: savedUser.lastName,
-            },
+            firstName: savedUser.firstName,
+            lastName: savedUser.lastName,
+        },
             "meriam123"
         );
         res.json({
@@ -63,6 +65,9 @@ router.post("/register", async(req, res) => {
                 _id: savedUser._id,
                 firstName: savedUser.firstName,
                 lastName: savedUser.lastName,
+                email: savedUser.email,
+                role: role.name,
+
             },
         });
     } catch (error) {
