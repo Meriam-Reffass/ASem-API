@@ -6,27 +6,27 @@ const Class = mongoose.model(
         className: { type: String, required: true },
         promo: { type: Number, required: true },
         monday: {
-            morning: { type: Boolean, required: true, default: true },
-            afternoon: { type: Boolean, required: true, default: true },
+            morning: { type: Boolean, required: true, default: false },
+            afternoon: { type: Boolean, required: true, default: false },
         }, tuesday: {
-            morning: { type: Boolean, required: true, default: true },
-            afternoon: { type: Boolean, required: true, default: true },
+            morning: { type: Boolean, required: true, default: false },
+            afternoon: { type: Boolean, required: true, default: false },
         }, wednesday: {
-            morning: { type: Boolean, required: true, default: true },
-            afternoon: { type: Boolean, required: true, default: true },
+            morning: { type: Boolean, required: true, default: false },
+            afternoon: { type: Boolean, required: true, default: false },
         }, thursday: {
-            morning: { type: Boolean, required: true, default: true },
-            afternoon: { type: Boolean, required: true, default: true },
+            morning: { type: Boolean, required: true, default: false },
+            afternoon: { type: Boolean, required: true, default: false },
         }, friday: {
-            morning: { type: Boolean, required: true, default: true },
-            afternoon: { type: Boolean, required: true, default: true },
+            morning: { type: Boolean, required: true, default: false },
+            afternoon: { type: Boolean, required: true, default: false },
         }, saturday: {
-            morning: { type: Boolean, required: true, default: true },
-            afternoon: { type: Boolean, required: true, default: true },
+            morning: { type: Boolean, required: true, default: false },
+            afternoon: { type: Boolean, required: true, default: false },
         },
         sunday: {
-            morning: { type: Boolean, required: true, default: true },
-            afternoon: { type: Boolean, required: true, default: true },
+            morning: { type: Boolean, required: true, default: false },
+            afternoon: { type: Boolean, required: true, default: false },
         },
 
 

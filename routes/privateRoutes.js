@@ -87,7 +87,7 @@ router.post("/addPresence", [isStudent, checkWorkingTime], async (req, res) => {
 router.get("/students", [isAdmin], async (req, res) => {
     const role = await Role.findOne({ name: "student" });
 
-    const users =await User.find({ role: role._id }).populate("studyClass","className promo");
+    const users = await User.find({ role: role._id }).populate("studyClass", "className promo");
     return res.send(users)
 });
 // router.get("/student/{id}", [isAdmin], async (res, req) => {
@@ -103,6 +103,20 @@ router.get("/students", [isAdmin], async (req, res) => {
 router.get("/classes", [isAdmin], async (req, res) => {
     const classes = await Class.find({});
     return res.send(classes)
+
+});
+router.post("/classes", [isAdmin], async (req, res) => {
+    const class_ =  new Class(req.body);
+    console.log(req.body)
+
+    try {
+        class_.save();
+        return res.send(class_)
+
+    } catch (error) {
+        res.status(500).send({ message: err });
+
+    }
 
 });
 // router.get("/class/{id}", [isAdmin], async (res, req) => {
@@ -135,18 +149,18 @@ router.get("/stats", [isAdmin], async (res, req) => {
             sumNonVerifiedHours: { $sum: "$nonVerifiedHours" }
         }
     }])
-   
+
     req.send(stats[0])
 });
 
-router.get("/stats/:id",async (req, res) => {
+router.get("/stats/:id", async (req, res) => {
     const role = await Role.findOne({ name: "student" });
     const user = await User.findById(req.params.id);
     const mongoose = require("mongoose");
     const ObjectId = mongoose.Types.ObjectId;
     console.log("khdmt");
 
-    const stats = await User.aggregate([{ $match: { _id: ObjectId( req.params.id) } },
+    const stats = await User.aggregate([{ $match: { _id: ObjectId(req.params.id) } },
 
     {
         $project: {
