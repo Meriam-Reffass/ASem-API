@@ -8,6 +8,7 @@ const classModel = require('../models/class.model');
 const Presence = require('../models/presence.model');
 const checkWorkingTime = require("../middlewares/checkWorkingTime");
 const moment = require("moment");
+const Class = require('../models/class.model');
 
 
 
@@ -83,9 +84,12 @@ router.post("/addPresence", [isStudent, checkWorkingTime], async (req, res) => {
 // router.put("/admin/{id}", [isAdmin], async (res, req) => {
 //     //TODO
 // });
-// router.get("/student", [isAdmin], async (res, req) => {
-//     //TODO
-// });
+router.get("/students", [isAdmin], async (req, res) => {
+    const role = await Role.findOne({ name: "student" });
+
+    const users =await User.find({ role: role._id }).populate("studyClass","className promo");
+    return res.send(users)
+});
 // router.get("/student/{id}", [isAdmin], async (res, req) => {
 //     //TODO
 // });
@@ -96,9 +100,11 @@ router.post("/addPresence", [isStudent, checkWorkingTime], async (req, res) => {
 //     //TODO
 // });
 
-// router.get("/class", [isAdmin], async (res, req) => {
-//     //TODO
-// });
+router.get("/classes", [isAdmin], async (req, res) => {
+    const classes = await Class.find({});
+    return res.send(classes)
+
+});
 // router.get("/class/{id}", [isAdmin], async (res, req) => {
 //     //TODO
 // });
