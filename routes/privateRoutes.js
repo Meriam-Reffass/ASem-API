@@ -106,25 +106,47 @@ router.get("/classes", [isAdmin], async (req, res) => {
 
 });
 router.post("/classes", [isAdmin], async (req, res) => {
-    const class_ =  new Class(req.body);
-    console.log(req.body)
+    const class_ = new Class(req.body);
 
     try {
         class_.save();
         return res.send(class_)
 
     } catch (error) {
-        res.status(500).send({ message: err });
+        res.status(500).send({ message: error });
 
     }
 
 });
-// router.get("/class/{id}", [isAdmin], async (res, req) => {
-//     //TODO
-// });
-// router.put("/class/{id}", [isAdmin], async (res, req) => {
-//     //TODO
-// });
+router.delete("/classes/:id", [isAdmin], async (req, res) => {
+
+    try {
+
+        await Class.findByIdAndDelete(req.params.id)
+        res.status(200).send({ "message": "ok" })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: error });
+
+    }
+
+});
+router.get("/classes/:id", [isAdmin], async (req, res) => {
+
+    try {
+
+        const cl = await Class.findById(req.params.id)
+        res.status(200).send(cl)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: error });
+
+    }
+
+});
+
 
 router.get("/stats", [isAdmin], async (res, req) => {
     const role = await Role.findOne({ name: "student" });
