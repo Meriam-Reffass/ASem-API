@@ -21,7 +21,7 @@ mongoose.connect(
         initial();
     }
 );
-
+// allow every URL to send data
 app.use(cors());
 // parse requests of content-type - application/json
 app.use(express.json());

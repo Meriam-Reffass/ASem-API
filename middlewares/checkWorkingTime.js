@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
     if (currentHour >= 9 && currentHour < 10) {
         req.timeOfDay = "morning";
         next();
-    } else if (currentHour >= 13 && currentHour < 16) {
+    } else if (currentHour >= 14 && currentHour < 15) {
         req.timeOfDay = "afternoon";
         next();
     } else {

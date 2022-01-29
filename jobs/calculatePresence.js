@@ -5,7 +5,7 @@ const classModel = require('../models/class.model');
 const Presence = require('../models/presence.model');
 const moment = require("moment");
 
-const job = new CronJob('00 00 10,16 * * 1-6', function () {
+const job = new CronJob('00 30 10,16 * * 1-6', function () {
     User.find({}, (err, users) => {
         users.forEach(async (user) => {
             const class_user = await classModel.findOne({ _id: user.studyClass });
